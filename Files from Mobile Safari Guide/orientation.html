@@ -1,0 +1,69 @@
+<html>
+<head>
+	<title>The Orientation Test</title>
+<style>
+html body { margin: 0; padding: 0; font-size:0.8em;font-family:arial;} 
+a {font-size:1.4em;}
+
+
+form {width:200px;}
+
+form input{ background-color:blue;-webkit-border-radius:100px;}
+
+.test-box{background-color:pink; -webkit-border-radius:10px;padding:10px;margin:10px}
+
+
+.top-menu{height:35px;background-color:black;width:100%;text-align: center; padding:0px; margin:0px; color:white;font-size:1.6em; padding-top:5px;}
+
+</style>
+<!--
+<meta name="viewport" content="width=device-width; initial-scale=1.0;height=200; maximum-scale=5.0;"/>
+-->
+
+<meta name="viewport" content="width=320, initial-scale=1.0"/>
+
+<script>
+	function updateOrientation()
+	{
+		var displayStr = "Orientation : ";
+		switch(window.orientation)
+		{
+		case 0:
+			displayStr += "Portrait";
+			break;
+		case -90:
+			displayStr += "Landscape (right, screen turned clockwise)"; 
+			break;
+		case 90:
+    		displayStr += "Landscape (left, screen turned counterclockwise)";
+            break;
+       	case 180:
+       		displayStr += "Portrait (upside-down portrait)";
+			break;
+		}
+        document.getElementById("output").innerHTML = displayStr;
+    }
+</script>
+
+
+</head>
+
+<body onload="updateOrientation();" onorientationchange="updateOrientation();">
+<div>
+
+	<div class="top-menu">
+	The Orientation Test
+	</div>
+
+
+
+	<div class="test-box">
+		<div id="output"></div>
+	</div>
+
+
+
+
+
+</body>
+</html>

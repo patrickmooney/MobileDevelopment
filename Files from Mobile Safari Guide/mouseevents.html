@@ -1,0 +1,137 @@
+<html>
+<head>
+	<title>Mouse Events Test</title>
+<style>
+html body { margin: 0; padding: 0; font-size:0.8em;font-family:arial;} 
+a {font-size:1.4em;}
+
+
+form {width:200px;}
+
+form input{ background-color:blue;-webkit-border-radius:100px;}
+
+.test-box{background-color:pink; -webkit-border-radius:10px;padding:10px;margin:10px}
+
+
+.top-menu{height:35px;background-color:black;width:100%;text-align: center; padding:0px; margin:0px; color:white;font-size:1.6em; padding-top:5px;}
+
+</style>
+<!--
+<meta name="viewport" content="width=device-width; initial-scale=1.0;height=200; maximum-scale=5.0;"/>
+-->
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0;"/>
+
+
+</head>
+
+<body>
+<div>
+
+	<div class="top-menu">
+	Mouse Events Test
+	</div>
+
+<div class="test-box">
+	<a href="#" 
+		onclick="alert('2.OnClick triggered on 1');return false;" 
+		onMouseOver="alert('1.onMouseOver triggered on 1');return false;"
+		>Test Link 1</a>
+	<br/>
+	The expected outcome of this test is:
+	<ul><li>1.onMouseOver</li><li>2.onClick</li></ul>
+
+</div>
+
+
+<div class="test-box">
+
+	<a href="#" 
+		onMouseOver="alert('1.onMouseOver triggered on 2');return false;"
+		onMouseMove="alert('2.onMouseMove triggered on 2');return false;"
+		>Test Link 2</a>
+	<br/>
+	Repeatedly click this link. The expected outcome of this test is:
+	<ul><li>1.onMouseOver for first click only</li><li>2.onMouseMove every other click</li></ul>
+
+</div>
+
+	<div class="test-box">
+		<a href="#" 
+			onMouseOver="alert('1.onMouseOver triggered on 3');return false;"
+			onMouseMove="alert('2.onMouseMove triggered on 3');return false;"
+			onMouseDown="alert('3.onMouseDown triggered on 3');return false;"
+			onMouseUp="alert('4.onMouseUp triggered on 3');return false;"
+			onClick="alert('5.onClick triggered on 3');return false;"
+			onMouseOut="alert('6.onMouseOut triggered on 3');return false;"
+
+			>Test Link 3</a> - <a href="#" 
+			
+			onClick="alert('7.onClick for Link 3b');return false;"
+
+			>Test Link 3b</a>
+		<br/>
+		The expected outcome of this test is:
+		<ul><li>1.onMouseOver</li>
+			<li>2.onMouseMove</li>
+			<li>3.onMouseDown</li>
+			<li>4.onMouseUp</li>
+			<li>5.onClick</li>
+		</ul>
+		Clicking on Link 3 a second time, will only perform 2 - 5. Clicking on Link 3b will trigger:
+		<ul><li>6.onMouseOver</li>
+			<li>7.onMouseMove</li>
+		</ul>
+
+	</div>
+
+	<div class="test-box">
+		
+		<a href="#" 
+			onMouseOver="alert('1.onMouseOver triggered on 4')"
+			onMouseMove="updateContentHolder();"
+			onMouseDown="alert('3.onMouseDown triggered on 4');return false;"
+			onMouseUp="alert('4.onMouseUp triggered on 4');return false;"
+			onClick="alert('5.onClick triggered on 4');return false;"
+			>Test Link 4</a>
+		<br/>
+		Content: <span id="ContentHolder">#</span><br/>
+		<em>Not working</em> - 
+		The expected outcome of this test is:
+		<ul><li>1.onMouseOver</li>
+			<li>2.onMouseMove</li>
+			<li>Content changed random number</li>
+			<li>None of the other events will trigger</li>
+		</ul>
+	</div>
+
+	<div class="test-box">
+		
+		<span onMouseMove = "alert('1.onMouseMove');">[Click onSpan 1]</span>
+		-
+		<span onMouseMove = "alert('2.onMouseMove');" onClick="void(0);">[Click onSpan 2]</span>
+		<ul>
+			<li>1.onMouseMove should not trigger on clicking 1 </li>
+			<li>2.onMouseMove should trigger on clicking 2 as it has an onClick="void(0);"</li>
+		</ul>
+		<em>This appears to be fixed in iOS6?</em>
+	</div>
+
+</div>
+
+
+<script>
+		function updateContentHolder()
+		{
+			var randomNumber = Math.random();
+			document.getElementById("ContentHolder").innerHTML=Math.random();
+			alert('2.onMouseMove triggered on 4 to update text');
+		}
+
+		</script>
+
+
+
+
+</body>
+</html>
